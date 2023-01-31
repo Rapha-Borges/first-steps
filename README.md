@@ -1,3 +1,5 @@
+![Terminal ScreenShot](https://github.com/Rapha-Borges/Oh-My-Zsh/blob/main/img/ScreenShot%20.png)
+
 # Install
 
 1. Install Oh My Zsh
