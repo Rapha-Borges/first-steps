@@ -46,6 +46,20 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ```
 curl https://raw.githubusercontent.com/Rapha-Borges/Oh-My-Zsh/master/files/.p10k.zsh > $HOME/.p10k.zsh && curl https://raw.githubusercontent.com/Rapha-Borges/Oh-My-Zsh/master/files/.zshrc > $HOME/.zshrc
 ```
+11. Install plugins
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+12. Add the plugin to the list of plugins for Oh My Zsh to load (inside ~/.zshrc):
+```
+vim ~/.zshrc
+```
+```
+plugins=( 
+    # other plugins...
+    zsh-autosuggestions
+)
+```
 
 # Log in at GitHub and configure the commit signature
 
@@ -98,3 +112,66 @@ git config --global user.signingkey <GPG key ID>
 git config --global commit.gpgsign true
 ```
 
+# Install Docker and Kubectl
+
+1. Install Docker
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+2. Install Kubectl
+```
+sudo apt-get install -y apt-transport-https ca-certificates curl
+```
+```
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+```
+sudo apt-get update
+sudo apt-get install -y kubectl
+```
+```
+alias k=kubectl
+```
+
+# Install Kind
+
+```
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+```
+
+# Install Helm and Terraform 
+
+1. Install Helm
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+2. Install Terraform
+```
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+```
+```
+wget -O- https://apt.releases.hashicorp.com/gpg | \
+gpg --dearmor | \
+sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+```
+```
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+sudo tee /etc/apt/sources.list.d/hashicorp.list
+```
+```
+sudo apt update
+sudo apt-get install terraform
+```
+```
+touch ~/.zshrc
+```
+```
+terraform -install-autocomplete
+```
