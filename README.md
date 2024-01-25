@@ -50,16 +50,6 @@ curl https://raw.githubusercontent.com/Rapha-Borges/Oh-My-Zsh/master/files/.p10k
 ```
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
-12. Add the plugin to the list of plugins for Oh My Zsh to load (inside ~/.zshrc):
-```
-vim ~/.zshrc
-```
-```
-plugins=( 
-    # other plugins...
-    zsh-autosuggestions
-)
-```
 
 # Log in at GitHub and configure the commit signature
 
