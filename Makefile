@@ -54,9 +54,6 @@ install-docker-kubectl:
 	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 	sudo apt-get update
 	sudo apt-get install -y kubectl
-	sudo apt-get install -y uidmap
-	dockerd-rootless-setuptool.sh install
-
 
 install-kind:
 	curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
@@ -74,11 +71,12 @@ install-opentofu:
 
 info:
 	gpg --list-secret-keys --keyid-format=long
-	@echo "Run 'chsh -s $(which zsh)' to change the default shell to zsh"
+	@echo "Run 'chsh -s \$$(which zsh)' to change the default shell to zsh"
+	@echo "To finish the setup, run 'dockerd-rootless-setuptool.sh install' and follow the instructions"
 	@echo "Copy your GPG key ID from the list and run 'make set-gpg-key GPG_KEY_ID=<GPG key ID>' and 'run sudo make set-gpg-key'"
 
 set-gpg-key:
-	git config --global user.signingkey $(GPG_KEY_ID)
+	git config --global user.signingkey $(GPG_KEY_ID) # TODO FIX
 	git config --global commit.gpgsign true
 
 unistall-all:
