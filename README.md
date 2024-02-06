@@ -1,56 +1,5 @@
 ![Terminal ScreenShot](https://github.com/Rapha-Borges/Oh-My-Zsh/blob/main/img/ScreenShot%20.png)
 
-# Install Oh-My-Zsh and configure the terminal
-
-1. Install Zsh
-```
-sudo apt install zsh
-```
-2. Check the version to confirm the installation
-```
-zsh --version
-```
-3. Set Zsh as the default shell
-```
-chsh -s $(which zsh)
-```
-4. Log out and log in back for the changes to take effect. Then verify that Zsh is the default shell:
-```
-echo $SHELL
-```
-5. Install Oh My Zsh
-```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-6. Install MesloLGS NF font
-
-- [MesloLGS NF Regular.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
-
-- [MesloLGS NF Bold.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf)
-
-- [MesloLGS NF Italic.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf)
-
-- [MesloLGS NF Bold Italic.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf)
-
-7. Open the terminal and press `0` to create the file ~/.zshrc containing just a comment
-
-8. Setup the font in your terminal
-
-    Open Terminal → Preferences and click on the selected profile under Profiles. Check Custom font under Text Appearance and select `MesloLGS NF Regular`.
-
-9. Install powerlevel10k theme
-```
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```
-10. Replace .pk10k.zsh and .zshrc files
-```
-curl https://raw.githubusercontent.com/Rapha-Borges/Oh-My-Zsh/master/files/.p10k.zsh > $HOME/.p10k.zsh && curl https://raw.githubusercontent.com/Rapha-Borges/Oh-My-Zsh/master/files/.zshrc > $HOME/.zshrc
-```
-11. Install plugins
-```
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-```
-
 # Log in at GitHub and configure the commit signature
 
 1. Install GitHub CLI
@@ -102,27 +51,95 @@ git config --global user.signingkey <GPG key ID>
 git config --global commit.gpgsign true
 ```
 
+# Install Oh-My-Zsh and configure the terminal
+
+1. Install Zsh
+```
+sudo apt install zsh
+```
+2. Check the version to confirm the installation
+```
+zsh --version
+```
+3. Set Zsh as the default shell
+```
+chsh -s $(which zsh)
+```
+4. Log out and log in back for the changes to take effect. Then verify that Zsh is the default shell:
+```
+echo $SHELL
+```
+5. Install Oh My Zsh
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+6. Install MesloLGS NF font
+
+- [MesloLGS NF Regular.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
+
+- [MesloLGS NF Bold.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf)
+
+- [MesloLGS NF Italic.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf)
+
+- [MesloLGS NF Bold Italic.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf)
+
+7. Setup the font in your terminal
+
+    Open Terminal → Preferences and click on the selected profile under Profiles. Check Custom font under Text Appearance and select `MesloLGS NF Regular`.
+
+9. Install powerlevel10k theme
+```
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+10. Install plugins
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+11. Install Stow
+
+```bash
+sudo apt-get install stow
+```
+
+12. Clone the repository
+
+```bash
+cd ~
+git clone https://github.com/Rapha-Borges/.dotfiles.git
+```
+
+13. Stow the desired configuration
+
+```bash
+cd .dotfiles && stow .
+```
+
+
 # Install Docker and Kubectl
 
 1. Install Docker
+
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
+
 2. Install Kubectl
+
 ```
 sudo apt-get install -y apt-transport-https ca-certificates curl
 ```
+
 ```
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
+
 ```
 sudo apt-get update
 sudo apt-get install -y kubectl
-```
-```
-alias k=kubectl
 ```
 
 # Install Kind
@@ -133,35 +150,23 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
 
-# Install Helm and Terraform 
+# Install Helm
 
 1. Install Helm
+
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
-2. Install Terraform
+
+# Install OpenTofu
+
+1. Install OpenTofu
+
 ```
-sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-```
-```
-wget -O- https://apt.releases.hashicorp.com/gpg | \
-gpg --dearmor | \
-sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-```
-```
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-sudo tee /etc/apt/sources.list.d/hashicorp.list
-```
-```
-sudo apt update
-sudo apt-get install terraform
-```
-```
-touch ~/.zshrc
-```
-```
-terraform -install-autocomplete
+curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
+chmod +x install-opentofu.sh
+./install-opentofu.sh --install-method deb
+rm install-opentofu.sh
 ```
