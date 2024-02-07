@@ -44,10 +44,9 @@ install-plugins:
 
 install-stow:
 	sudo apt-get install stow
-	cd ~
-	git clone https://github.com/Rapha-Borges/.dotfiles.git
-	rm .zshrc
-	cd .dotfiles && sudo stow .
+	git clone https://github.com/Rapha-Borges/.dotfiles.git ~/.dotfiles
+	rm -r -f ~/.zshrc ~/.gitconfig ~/.oci ~/.kube
+	cd ~/.dotfiles && sudo stow .
 
 install-docker-kubectl:
 	curl -fsSL https://get.docker.com -o get-docker.sh
