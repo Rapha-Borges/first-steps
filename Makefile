@@ -29,12 +29,12 @@ install-oh-my-zsh:
 
 install-fonts:
 	# Download and install MesloLGS NF fonts
-	curl -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf 
-	curl -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-	curl -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-	curl -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
-	sudo mkdir -p ~/.local/share/fonts/
-	sudo mv MesloLGS* ~/.local/share/fonts/
+	wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+	wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+	wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+	wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+	mkdir -p ~/.local/share/fonts/
+	mv MesloLGS* ~/.local/share/fonts/
 
 install-powerlevel10k:
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $${ZSH_CUSTOM:-$$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -45,7 +45,7 @@ install-plugins:
 install-stow:
 	sudo apt-get install stow
 	git clone https://github.com/Rapha-Borges/.dotfiles.git ~/.dotfiles
-	rm -r -f ~/.zshrc ~/.gitconfig ~/.oci ~/.kube
+	rm -r -f ~/.zshrc ~/.gitconfig ~/.oci ~/.kube ~/.ssh
 	cd ~/.dotfiles && sudo stow .
 
 install-docker-kubectl:
@@ -53,6 +53,7 @@ install-docker-kubectl:
 	sudo sh get-docker.sh
 	curl -LO https://dl.k8s.io/release/$(KUBECTL_VERSION)/bin/linux/amd64/kubectl
 	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+	rm get-docker.sh kubectl
 
 install-kind:
 	[ $$(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/$(KIND_VERSION)/kind-linux-amd64
