@@ -1,6 +1,6 @@
-.PHONY: update setup-github-cli setup-git-config install-oh-my-zsh install-fonts install-powerlevel10k install-plugins install-stow install-docker-kubectl install-kind install-helm install-opentofu info help set-gpg-key unistall-all
+.PHONY: update setup-github-cli setup-git-config install-oh-my-zsh install-fonts install-powerlevel10k install-plugins install-stow install-docker-kubectl install-kind install-helm install-opentofu install-globalping info help set-gpg-key unistall-all
 
-all: update setup-github-cli setup-git-config install-oh-my-zsh install-fonts install-powerlevel10k install-plugins install-stow install-docker-kubectl install-kind install-helm install-opentofu set-gpg-key info
+all: update setup-github-cli setup-git-config install-oh-my-zsh install-fonts install-powerlevel10k install-plugins install-stow install-docker-kubectl install-kind install-helm install-opentofu install-globalping set-gpg-key info
 
 KUBECTL_VERSION := v1.29.1
 KIND_VERSION := v0.20.0
@@ -68,6 +68,11 @@ install-opentofu:
 	chmod +x install-opentofu.sh
 	./install-opentofu.sh --install-method deb
 	rm install-opentofu.sh
+
+install-globalping:
+	curl -s https://packagecloud.io/install/repositories/jsdelivr/globalping/script.deb.sh | sudo bash
+	sudo apt install globalping
+	globalping --help
 
 set-gpg-key:
 	@GPG_KEY_ID=$$(gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $$2}' | awk -F/ '{print $$2}'); \
