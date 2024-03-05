@@ -170,3 +170,12 @@ chmod +x install-opentofu.sh
 ./install-opentofu.sh --install-method deb
 rm install-opentofu.sh
 ```
+
+# Install AppImageLauncher
+
+```
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:appimagelauncher-team/stable
+sudo apt update
+sudo apt install appimagelauncher
+```
