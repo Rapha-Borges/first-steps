@@ -19,12 +19,14 @@ setup-github-cli:
 setup-git-config:
 	gh auth login
 	git config --global user.name "Raphael Borges"
-	git config --global user.email "raps_rnb@hotmail.com"
+	git config --global user.email "53947674+Rapha-Borges@users.noreply.github.com"
 	gpg --full-generate-key
 	
 install-oh-my-zsh:
+	sudo rm -rf /home/rapha/.zshrc /home/rapha/.zshrc.pre-oh-my-zsh*
 	sudo apt install zsh -y
 	zsh --version
+	sudo rm -rf "/home/rapha/.oh-my-zsh"
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 install-fonts:
@@ -44,9 +46,10 @@ install-plugins:
 
 install-stow:
 	sudo apt-get install stow
+	sudo rm -rf ~/.dotfiles
 	git clone https://github.com/Rapha-Borges/.dotfiles.git ~/.dotfiles
-	rm -r -f ~/.zshrc ~/.gitconfig ~/.oci ~/.kube ~/.ssh
-	cd ~/.dotfiles && sudo stow .
+	sudo rm -rf ~/.zshrc ~/.gitconfig ~/.oci ~/.kube ~/.ssh ~/.bashrc ~/cosign ~/.p10k.zsh ~/.vimrc ~/.zshrc.pre-oh-my-zsh*
+	cd ~/.dotfiles && stow .
 
 install-docker-kubectl:
 	curl -fsSL https://get.docker.com -o get-docker.sh
@@ -86,7 +89,7 @@ unistall-all:
 	-sudo rm -rf /usr/local/bin/kind /usr/local/bin/helm
 	-sudo rm -rf ~/.oh-my-zsh ~/.zshrc ~/.local/share/fonts/MesloLGS* /usr/local/bin/kind /usr/local/bin/helm /usr/local/bin/kubectl /usr/local/bin/docker /usr/local/bin/dockerd-rootless-setuptool.sh /usr/local/bin/opentofu
 	-sudo rm -rf /etc/apt/sources.list.d/github-cli.list /etc/apt/sources.list.d/kubernetes.list /etc/apt/keyrings/githubcli-archive-keyring.gpg /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-	-sudo rm -r /themes/powerlevel10k /plugins/zsh-autosuggestions
+	-sudo rm -rf /themes/powerlevel10k /plugins/zsh-autosuggestions
 	-sudo apt-get autoremove -y
 	-sudo apt-get clean
 
