@@ -48,7 +48,7 @@ install-stow:
 	sudo apt-get install stow
 	sudo rm -rf ~/.dotfiles
 	git clone https://github.com/Rapha-Borges/.dotfiles.git ~/.dotfiles
-	sudo rm -rf ~/.zshrc ~/.gitconfig ~/.oci ~/.kube ~/.ssh ~/.bashrc ~/cosign ~/.p10k.zsh ~/.vimrc ~/.zshrc.pre-oh-my-zsh*
+	sudo rm -rf ~/.zshrc ~/.oci ~/.kube ~/.ssh ~/.bashrc ~/cosign ~/.p10k.zsh ~/.vimrc ~/.zshrc.pre-oh-my-zsh*
 	cd ~/.dotfiles && stow .
 
 install-docker-kubectl:
@@ -82,6 +82,9 @@ info:
 	@echo "############################### MANUAL STEPS #################################################"
 	@echo "Run 'chsh -s \$$(which zsh)' to change the default shell to zsh"
 	@echo "To finish the setup, run 'dockerd-rootless-setuptool.sh install' and follow the instructions"
+	@GPG_KEY_ID=$$(gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $$2}' | awk -F/ '{print $$2}'); \
+	export GPG_KEY_ID=$$GPG_KEY_ID; \
+	echo "Run ' gpg --armor --export $$GPG_KEY_ID ' and add the value to your GitHub account at https://github.com/settings/gpg/new"
 	@echo "############################### MANUAL STEPS #################################################"
 
 unistall-all:
